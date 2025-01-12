@@ -5,9 +5,34 @@
 \section{Carotid Segmentation}
 \lipsum[1-3]
 \section{IDIF Estimation}
+Direct quantification with the IDIF extracted from the MRI mask of the carotids is impractical due to the strong Partial Volume Effects (PVE) in PET images. This however can be corrected by the use of the Geometric Transfer Matrix (GTM) method. This method considers the observered TAC to be the linear combination of the true real value and the other effecting regions.
+
+\[
+	\underbrace{
+		\begin{bmatrix}
+			C'_{carotid} \\
+			C_{background}
+		\end{bmatrix}
+	}_{\text{Observered}}
+	=
+	\underbrace{
+		\begin{bmatrix}
+			\omega_{c \rightarrow c}  & \omega_{bg \rightarrow c}  \\
+			\omega_{c \rightarrow bg} & \omega_{bg \rightarrow bg}
+		\end{bmatrix}
+	}_{\text{Geometric Transfer Matrix}}
+	.
+	\underbrace{
+		\begin{bmatrix}
+			C_{IF} \\
+			C_{tissue}
+		\end{bmatrix}
+	}_{\text{Unknown}}
+\]
+
+Where $\omega_{n \rightarrow m}$ is the spill coefficient of region $n$ onto region $m$.
 
 
-\lipsum[1-3]
 \section{FDG Quantification}
 \lipsum[1-3]
 \section{Evaluation and Assessment}
