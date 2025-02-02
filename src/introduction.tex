@@ -1,15 +1,20 @@
 \chapter{Introduction}
+% Positron Emission Tomography (PET) has emerged as a powerful non-invasive imaging technique that provides insight into the functional processes within the human body. Unlike conventional imaging modalities that primarily depict anatomical structures, PET enables the visualization and quantification of metabolic and physiological activities by detecting pairs of gamma rays emitted indirectly by a positron-emitting radiotracer. This chapter provides an overview of PET imaging, with a focus on dynamic PET, Time Activity Curve (TAC) modeling, the importance of the input function in quantitative analysis, and the utilization of image derived input functions.
 
-\section{Positron Emission Tomography Imaging}
-explain dynamic pet
-\cite{Faulkes2013}
+\section{Positron Emission Tomography }
 
-\lipsum[1-1]
-\section{Dynamic PET and TAC Modeling}
-\lipsum[1-1]
+Positron Emission Tomography (PET) is a functional imaging technique widely used in clinical and research settings to monitor physiological processes. In PET, a biologically active molecule is labeled with a positron-emitting radioisotope, known as radiotracer (e.g. $[^{11}\textrm{C}]$ or $[^{18}\textrm{F}]$), and introduced into the body. As the radiotracer accumulates in target tissues, its radioactive decay produces positrons, which interact with electrons to emit pairs of gamma photons in nearly opposite directions. These photons are detected by the PET scanner, and through image reconstruction algorithms, a three-dimensional representation of tracer distribution is generated. This imaging modality allows for the investigation of metabolic changes, receptor binding, and other biochemical processes, providing invaluable information in oncology, neurology, cardiology, and other fields.
+
+% \section{Dynamic PET and TAC Modeling}
+
+Unlike static PET imaging that captures a snapshot of radiotracer distribution, dynamic PET involves acquiring a series of images over a period of time immediately following tracer administration. This temporal information is crucial for understanding the kinetics of radiotracer uptake and clearance. The resulting time-activity curves (TACs) represent the change in tracer concentration within a region of interest over time. TAC modeling employs mathematical and statistical methods to describe these curves and extract quantitative parameters that reflect underlying physiological processes. Such kinetic modeling is essential for distinguishing between different tissue characteristics, assessing drug-receptor interactions, and improving the accuracy of diagnostic and prognostic evaluations.
+
 \section{Need for Input Function in PET}
-\lipsum[1-1]
+
+% A critical element in the quantitative analysis of dynamic PET data is the input function, which represents the time course of the radiotracer concentration in the blood plasma. The input function is necessary for solving the kinetic models that link the radiotracer kinetics in the tissue to those in the blood. Traditionally, the arterial input function is obtained through invasive blood sampling, a procedure that can be technically challenging and uncomfortable for the patient. Accurate knowledge of the input function is vital because errors in its determination can lead to significant inaccuracies in the estimated physiological parameters. Therefore, establishing a reliable input function is a cornerstone for the success of quantitative PET studies.
 
 \section{Image Derived Input Function}
-\lipsum[1-1]
 
+% To overcome the challenges associated with invasive blood sampling, researchers have developed methods to extract the input function directly from the PET images, known as the Image Derived Input Function (IDIF). IDIF techniques typically involve identifying vascular structures or regions with high blood pool activity within the imaging field and applying appropriate corrections to account for partial volume effects, spill-over, and other artifacts. The adoption of IDIF has the potential to simplify the imaging workflow, reduce patient discomfort, and provide a more streamlined approach to quantitative PET analysis. However, the successful implementation of IDIF requires careful validation against the traditional arterial input function to ensure accuracy and reliability.
+
+% In summary, this chapter lays the foundation for understanding the key components of dynamic PET imaging and the methodologies involved in quantitative analysis. By exploring the transition from conventional static imaging to dynamic PET and the subsequent modeling challenges, we highlight the critical role of the input function—whether measured invasively or derived from images—in the accurate interpretation of PET data.
