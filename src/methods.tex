@@ -1,8 +1,10 @@
 \chapter{Materials and Methods}
 
 \section{Dataset Description}
-We utilized a dataset of 56 comatose patients, aged between  X and Y years, in which dynamic PET imaging was conducted 90 minutes using \(^{18}\)FDG as the tracer, with arterial blood sampling and TOF-MRA images acquired during the same session.
-\pdfcomment{Do i need to say the age or mention more details?}
+We utilized a dataset comprising 56 comatose patients, aged between X and Y years.
+For each patient, dynamic PET imaging was performed over a 90-minute period using \(^{18}\)FDG as the tracer.
+In addition, arterial blood sampling and TOF-MRA images were acquired during the same session. \pdfcomment{Do i need to say the age or mention more details?}
+
 \section{Carotid Segmentation\label{sec:carotid}}
 Since vessels appear as hypersignal in TOF-MRA, a high-intensity thresholding technique was employed.
 First, a threshold value was computed by selecting all nonzero intensity values and then determining the intensity level at the (1 – 0.003) quantile (i.e., the 99.7th percentile) of these intensities.
