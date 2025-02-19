@@ -1,5 +1,4 @@
 \documentclass[a4paper,12pt,twoside,english,openany]{book}
-[a4paper,12pt,twoside]
 \usepackage[icon=Note,color=yellow,author=Sepand]{pdfcomment}
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
@@ -18,7 +17,7 @@
 
 \addbibresource{res/biblio.bib} 
 
-\usepackage{caption}
+\usepackage[font=small,labelfont=bf]{caption}
 \usepackage{subcaption}
 \usepackage{float}
 \usepackage{multirow}
@@ -39,6 +38,7 @@
 \usepackage{tabu}
 \usepackage{pdfpages}
 \usepackage{arydshln}
+\usepackage{titling}
 \usepackage{calc}
 \usepackage{titlesec} 
 \usepackage{sectsty}
@@ -67,7 +67,7 @@
 %\subsectionfont{\color{uclablue}}  % sets colour of subsections, ou gray, teal 
 \definecolor{darkseagreen}{rgb}{0.56, 0.74, 0.56}
 
-\title{Multimodal MRI-PET Imaging: Estimation of Image-Derived Arterial Input Function in Brain PET Imaging \\ Application to Modeling PET Dynamics of Glucose Metabolism in Patients with Impaired Consciousness}
+\title{Estimation of Image-Derived Arterial Input Function in Brain PET Imaging: \\ Application to Modeling PET Dynamics of Glucose Metabolism in Patients with Impaired Consciousness}
 \author{Sepand Ali Madad Soltani}
 \date{January 2025}
 
@@ -80,7 +80,7 @@
 \usepackage[xindy]{imakeidx}
 % \makeindex
 %\input{auxilliaires/glossaire}
-
+\def\mrglu{\text{MR}_{\text{glu}}}
 \begin{document}
 
 \begin{titlepage}
@@ -100,10 +100,7 @@
 		\rule{\textwidth}{0.8pt} \\
 		\vspace{10pt}
 
-		{\Large \bfseries Multimodal MRI-PET Imaging:
-			Estimation of Image-Derived Arterial Input Function in Brain PET Imaging
-			Application to Modeling PET Dynamics of Glucose Metabolism in Patients with Impaired Consciousness
-		}
+		{\Large \bfseries \thetitle}
 		\rule{\textwidth}{0.8pt} \\
 
 	\end{center}

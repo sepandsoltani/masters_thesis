@@ -6,10 +6,13 @@ In the original carotid segmentation algorithm, the TOF-MRA image was smoothed t
 The purpose of this smoothing step was to attenuate noise; however, because carotids inherently exhibit high-frequency spatial features, the smoothing inadvertently blurred these critical details, ultimately reducing the accuracy of the segmentation.
 Hence, this step was removed.
 
-In the adaptive thresholding step, all voxels—including those with zero intensity—were originally included.
-This led to a significant imbalance in the intensity histograms, making the thresholding highly susceptible to variations in the field-of-view (FOV) and the effects of zero padding in the TOF-MRA image.
+In the adaptive thresholding step, all voxels, including those with zero intensity were originally included.
+This led to a significant imbalance in the intensity histograms, making the thresholding highly susceptible to variations in the number of slices and the effects of zero padding in the TOF-MRA image.
 Limiting to only nonzero voxels resulted in an immediate improvement in the final segmentation.
 Despite these improvements, some non-carotid tissues were inadvertently selected by the algorithm, hence the cuboid mask mentioned in Section~\ref{sec:carotid} was introduced.
 
 Significant improvements have been made to the overall code quality and performance.
-These include major bug fixes, a streamlined pipeline, multi-processing support, the addition of a configuration file for customizable experiments, and the integration of evaluation metrics for individual subjects as well as for overall dataset performance.
+These include major bug fixes, streamlining the pipeline, multi-processing support,
+% the addition of a configuration file containing for customizable experiments, 
+and the integration of evaluation metrics for individual subjects as well as for overall dataset performance.
+
