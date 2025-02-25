@@ -9,22 +9,22 @@ This imaging modality allows for the investigation of metabolic changes, recepto
 There are two main methods for acquiring PET images: static imaging and dynamic imaging.
 Static PET involves acquiring a single scan after the radiotracer injection.
 This single snapshot offers a powerful yet simplified view of tracer distribution.
-The common quantification metric in static imaging is the Standardized Uptake Value (SUV), which normalizes tissue uptake by the injected dose and patient weight, allowing for a semi-quantitative comparison of tracer accumulation across different tissues or over time \cite{TODO}.
+The common quantification metric in static imaging is the Standardized Uptake Value (SUV), which normalizes tissue uptake by the injected dose and patient weight, allowing for a semi-quantitative comparison of tracer accumulation across different tissues or over time \cite{keyes1995suv}.
 Due to its simplicity, static PET is widely used in clinical settings; however, it also has limitations.
 Because it reflects only one time point, the SUV cannot capture the temporal dynamics of tracer uptake and clearance, and various physiological factors may influence its measurements, thereby reducing its accuracy.
 
 Dynamic PET imaging provides a more comprehensive view of radiotracer kinetics by acquiring a series of images over a period ranging from a few minutes to more than an hour, depending on the tracer type.
 Instead of a single snapshot, dynamic imaging produces time-activity curves (TACs) that illustrate how tracer concentration in each tissue changes throughout the scanning period.
-This approach enables the measurement of physiological parameters such as the tracer rate of influx (\(K_i\)), volume of distribution (\(V_T\)), and the rates of phosphorylation and dephosphorylation.
-\pdfcomment{justification and practical use for choosing dynamic pet over static}
+This approach enables the measurement of physiological parameters such as the tracer rate of influx (\(K_i\)) for radiotracers with irreversible uptake (e.g. \fdg ), volume of distribution (\(V_T\)), and the rates of phosphorylation and dephosphorylation.
 
-\section{Compartmental Model}
-To quantify these parameters, kinetic modeling is employed.
-Various graphical models (e.g., the Logan \cite{TODO} and Patlak \cite{TODO} methods) have been proposed; however, compartmental modeling is the most popular and is considered the most accurate approach in kinetic modeling.
+\section{Kinetic Modeling}
+To quantify pharmacokinetic parameters, kinetic modeling is employed.
+Compartmental modeling is the most popular and is considered the most accurate approach in kinetic modeling.
 In compartmental modeling, the distribution and kinetics of a radiotracer are described by dividing the system into distinct compartments, each representing a pool of tracer that behaves uniformly.
 Interactions between compartments can be unidirectional or bidirectional, meaning the tracer may either move in and out or only enter a compartment.
+Various graphical models (e.g., the Logan \cite{logan1990graphical} and Patlak \cite{patlak1983graphical} methods), as well as classical compartmental model fitting approaches, are used to analyze tracer kinetics.
 
-Here, we focus on the two-tissue compartment model (2TCM), also known as the three-compartment model in series mode when using FDG as the tracer.
+Figure~\ref{fig:2tcm} shows the irreversible two-tissue compartment model (2TCM), also known as the three-compartment model, in series mode.
 This model comprises one tissue compartment for the free tracer, \(C_F(t)\), and another for the receptor-bound tracer, \(C_B(t)\), in addition to an external compartment representing the tracer concentration in the plasma or blood, denoted as the input function \(C_P(t)\).
 
 The tracer kinetics are governed by a series of first-order differential equations, in which the exchange rates between the compartments are considered constant:
@@ -34,27 +34,16 @@ The tracer kinetics are governed by a series of first-order differential equatio
 \end{align}
 where \(K_1\), \(k_2\), \(k_3\), and \(k_4\) are the constant rate parameters.
 
-It is generally assumed that once FDG is phosphorylated (i.e., bound), there is little to no dephosphorylation back to the free (unbound) compartment.
-Therefore, we can set \(k_4 = 0\) \cite{TODO}.
-This assumption leads to the irreversible two-tissue compartment model.
+It is generally assumed that once \fdg$ $ is phosphorylated (i.e., bound), there is little to no dephosphorylation back to the free (unbound) compartment \cite{schmidt1992errors}.
+Therefore, we can set \(k_4 = 0\), treating the process as irreversible.
 Thus, Equations~\eqref{eq:2tcm-c1} and \eqref{eq:2tcm-c2} simplify to
 \begin{align}
 	\frac{dC_F(t)}{dt} & = K_1 \, C_P(t) \;-\; \bigl(k_2 + k_3\bigr) C_F(t) \,, \\[6pt]
 	\frac{dC_B(t)}{dt} & = k_3 \, C_F(t) \,.
 \end{align}
 
-The total concentration measured by PET, \(C_T(t)\), is given by
-\begin{equation}
-	C_T(t) \;=\; C_F(t) \;+\; C_B(t) \;+\; C_P(t).
-\end{equation}
 
-The parameters \(K_1\), \(k_2\), and \(k_3\) can be estimated by fitting the model to the measured PET time-activity curves (TACs), using \(C_P(t)\) as the input function.
-Consequently, the influx rate (trapping rate) of FDG in the tissue, \(K_i\), can be derived as
-\begin{equation}
-	K_i = \frac{K_1 \times k_3}{k_2 + k_3} \,.
-\end{equation}
-
-\begin{figure}
+\begin{figure}[b]
 	\centering
 	\begin{tikzpicture}[>=latex, thick]
 		\node[draw, rounded corners, minimum width=2.5cm, minimum height=2cm, align=center] (Cp) at (0,0) {$C_P$};
@@ -88,8 +77,20 @@ Consequently, the influx rate (trapping rate) of FDG in the tissue, \(K_i\), can
 	\label{fig:2tcm}
 \end{figure}
 
-FDG is an analog of glucose, not glucose itself.
-To convert the FDG trapping rate into the actual rate of glucose metabolism, both the glucose concentration and the lumped constant must be taken into account.
+The total radiotracer tissular kinetic measured by PET (the PET data), \(C_T(t)\), is given by
+\begin{equation}
+	C_T(t) \;=\; C_F(t) \;+\; C_B(t) \;+\; C_P(t).
+\end{equation}
+
+Thus to solve this system of equations and to estimate \(K_1\), \(k_2\), and \(k_3\) parameters, we must fit the model using the measured PET TACs ($C_T$) and the input function ($C_P$).
+% to the measured PET TACs ($C_T$), using \(C_P(t)\) as the input function.
+Consequently, the influx rate (trapping rate) of \fdg$ $ in the tissue, \(K_i\), can be derived as
+\begin{equation}
+	K_i = \frac{K_1 \times k_3}{k_2 + k_3} \,.
+\end{equation}
+
+\fdg$ $ is an analog of glucose, not glucose itself.
+To convert the \fdg$ $ trapping rate into the actual rate of glucose metabolism, both the glucose concentration and the lumped constant must be taken into account.
 \begin{equation}
 	\textrm{MR}_{glu} \; (\textrm{\textmu mol/min/100g}) = \frac{[C]}{LC} \cdot K_i \,.
 \end{equation}
@@ -98,30 +99,50 @@ Here, \(\textrm{MR}_{glu}\) represents the metabolic rate of glucose, \([C]\) de
 \section{Input Function}
 \subsection{Arterial Input Function}
 The arterial input function (AIF) is considered the gold standard for obtaining the input function.
-It is determined by inserting an arterial catheter into the patient and continuously drawing blood samples to measure the radiotracer concentration, thereby obtaining the blood time-activity curve (TAC) used in the quantification model.
+It is determined by inserting an arterial catheter into the patient and continuously drawing blood samples to measure the radiotracer concentration, thereby obtaining the blood activity curve used in the quantification model.
 However, this procedure is invasive and can cause discomfort, potentially discouraging patients from undergoing future examinations.
 Furthermore, this method is labor-intensive and requires trained personnel to manage both the patient and the measurement devices.
 
 \subsection{Image Derived Input Function}
 The image-derived input function (IDIF) has been proposed as a non-invasive alternative for obtaining the input function.
 IDIF techniques typically involve identifying vascular structures or regions with high blood pool activity within the imaging field and extracting the input function directly from the PET images.
-In brain PET imaging, the carotid arteries are the largest vessels present in the limited field of view (FOV) and have a diameter of approximately 5 mm, which is comparable to the typical spatial resolution of PET.
+In brain PET imaging, the carotid arteries are the largest vessels present in the limited field of view (FOV) and have a diameter of approximately 5 mm, which is comparable to the typical spatial resolution of PET (4-6mm FWHM).
 Therefore, directly extracting the carotids from PET images is impractical due to the limited resolution and the strong partial volume effects (PVE) present.
-
-% With the emergence of hybrid PET/MRI machines, simultaneous acquisition of functional and anatomical data has become possible, with MRI providing high-resolution soft tissue contrast while PET captures metabolic activity.
-% Time-of-flight (TOF) MR angiography (MRA) offers high contrast in arteries, enabling accurate segmentation of the carotids.
-% However, even with precise segmentation, the input function obtained by directly applying the mask to the PET image suffers from partial volume effects and requires appropriate correction.
 
 With the emergence of hybrid PET/MRI machines, it has become feasible to acquire both functional and anatomical data simultaneously.
 MRI provides high-resolution soft tissue contrast, while PET captures metabolic activity.
-For instance, time-of-flight (TOF) MR angiography (MRA) delivers excellent arterial contrast, which allows for accurate segmentation of vascular structures such as the carotid arteries.
-However, even with a high-resolution anatomical guidance, directly applying the segmented arterial mask to the PET images introduces challenges.
+For instance, time-of-flight MR angiography (TOF-MRA) delivers excellent arterial contrast, which allows for accurate segmentation of vascular structures such as the carotid arteries.
+However, even with a high-resolution anatomical guidance, directly applying the segmented arterial mask to the PET images introduces challenges \cite{zanotti2011image}.
 In particular, the limited spatial resolution of PET can lead to partial volume effects, resulting in inaccuracies in the derived input function.
 Consequently, additional correction techniques are required to mitigate these effects and ensure reliable quantification.
 
+Several methods have been developed to enhance IDIF accuracy by addressing partial volume correction and automation challenges.
+Early PET-only approaches primarily focused on classical partial volume correction (PVC) techniques \cite{mourik2009image}, while more recent methods have explored supervised clustering algorithms \cite{lyoo2014image} and deep learning approaches \cite{chavan2024end,ferrante2024physically}.
+Hybrid PET/MRI methods improve carotid artery delineation by leveraging anatomical imaging. The caliPER software, for instance, employs a semi-automated approach for IDIF extraction using carotid masks obtained from T1 or TOF-MRA images, incorporating partial volume correction \cite{dassanayake2022caliper}.
+Additionally, fully automated methods have been proposed to enhance carotid segmentation and PVC techniques \cite{sari2017estimation, jochimsen2016fully, khalighi2018image, sundar2019towards}.
 
-	[TODO] include more bibliography here.
+% Various techniques have been proposed for IDIF extraction in PET/MRI hybrid imaging.
+% \citeauthor{dassanayake2022caliper} \cite{dassanayake2022caliper} developed caliPER; A semi-automated software for IDIF extraction using carotid masks obtained from T1 or TOF-MRA images with partial volume correction.
+% Supervised clustering algorithms \cite{lyoo2014image} and deep learning pipelines \cite{chavan2024end} eliminate manual carotid segmentation.
+% % \citeauthor{sundar2019towards} \cite{sundar2019towards} proposed a fully automatique technique for carotid segmentation and partial volume effect correction from TOF-MRA images.
+% % Advanced in deep learning techniques gave way to techniques such as
+% Recent work highlights progress in automating IDIF extraction using anatomical PET/MRI guidance and partial volume correction (PVC).
+% Supervised clustering algorithms \cite{lyoo2014image} and deep learning pipelines \cite{chavan2024end} eliminate manual carotid segmentation, achieving errors <10\% compared to arterial inputs.
+%
+% Several methods have been developed to enhance IDIF accuracy by addressing partial volume correction and automation challenges.
+% caliper; a semi-automated software for idif extraction using carotid masks obtained from t1 or tof-mra images with partial volume correction.
+% It enabled blood-free quantification with minimal bias \cite{dassanayake2022caliper}.
+% Supervised clustering techniques reduce noise and operator variability by automating the carotid segmentation process while maintaining accuracy \cite{lyoo2014image}.
+% \citeauthor{chavan2024end} proposed an end-to-end deep learning technique to directly extract the IDIF 
+% % Deep learning pipelines using 3D U-Net and RNN models further improve carotid segmentation and IDIF estimation \cite{chavan2024end}.
+% Automated MR-driven IDIF extraction has shown strong agreement with arterial sampling \cite{sundar2019towards},
+% % while optimized TOF-PET/MR techniques help mitigate spill-over effects in cerebral blood flow mapping \cite{khalighi2018image}.
+% These advancements improve the reliability and clinical feasibility of non-invasive IDIF methods.
 
+% Tools like caliPER \cite{dassanayake2022caliper} integrate MR-derived carotid masks with PVC for Patlak mapping, reducing bias in [18F]FDG quantification to <8\%.
 
-\citeauthor{irace2021bayesian} \cite{irace2021bayesian} proposed a method for IDIF estimation by performing MRA-driven carotid segmentation and using a Bayesian framework for incorporating prior knowledge into a geometric transfer matrix method—a classical partial volume correction technique.
+% Hybrid PET/MRI protocols further validate MR-driven IDIFs, showing <5\% deviation in AUC and 3.2\% error in glucose metabolism \cite{sundar2019towards}.
+% Despite advances, residual variability persists in spill-in/spill-out correction, particularly for small vessels \cite{khalighi2018image}, underscoring the need for robust, generalized PVC frameworks.
+
+\citeauthor{irace2021bayesian} \cite{irace2021bayesian} proposed an automatique method for IDIF estimation by performing TOF-MRA driven carotid segmentation and using a Bayesian framework for incorporating prior knowledge into a geometric transfer matrix method \cite{rousset1998correction}---a classical partial volume correction technique.
 The aim here was to improve on this method and increase accuracy.
