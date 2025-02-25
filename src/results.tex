@@ -20,46 +20,45 @@ However, the algorithm acted overly conservative at times. It inadvertently excl
 	\label{fig:seg_compare}
 \end{figure}
 \section{IDIF}
-IDIF estimation was performed using both the Bayesian GTM (BGTM) and the conventional GTM PVC methods.
-In Figure~\ref{fig:ifs}, we see the comparison of the two methods for one of the best and worst performing subjects.
-In both cases, BGTM performed comparatively better than GTM with varying degrees.
-The reason for this performance difference across subjects is not entirely clear and further analysis is needed to understand the contributing factors.
+IDIF estimation was performed using both the Bayesian GTM (BGTM) and conventional GTM PVC methods.
+Figure~\ref{fig:ifs} compares the two methods for one of the best- and worst-performing subjects.
+In the well-performing subject, BGTM significantly outperforms GTM; however, in the poorly performing case, BGTM falls short of GTM.
 The average mean absolute error of the cAUC curves across the dataset was 14,202 for BGTM and 33,764 for GTM (Figure~\ref{subfig:cauc_boxplot}).
 
-\begin {figure}[h]
-\centering
-\begin{subfigure}[b]{0.322\textwidth}
-	\includegraphics[width=\textwidth]{figures/MOLGU07704_1_if_comparison.png}
-	\caption{}
-	\label{subfig:good_if_compare}
-\end{subfigure}
-\begin{subfigure}[b]{0.322\textwidth}
-	\includegraphics[width=\textwidth]{figures/MOLGU07704_1_trap.png}
-	\caption{}
-	\label{subfig:good_trap_compare}
-\end{subfigure}
-\begin{subfigure}[b]{0.322\textwidth}
-	\includegraphics[width=\textwidth]{figures/MOLGU07704_1_cmrglu.png}
-	\caption{}
-	\label{fig:good_cmrglu}
-\end{subfigure}
-\begin{subfigure}[b]{0.322\textwidth}
-	\includegraphics[width=\textwidth]{figures/SK11073_1_if_comparison.png}
-	\caption{}
-	\label{subfig:bad_if_compare}
-\end{subfigure}
-\begin{subfigure}[b]{0.322\textwidth}
-	\includegraphics[width=\textwidth]{figures/SK11073_1_trap.png}
-	\caption{}
-	\label{subfig:bad_trap_compare}
-\end{subfigure}
-\begin{subfigure}[b]{0.322\textwidth}
-	\includegraphics[width=\textwidth]{figures/SK11073_1_cmrglu.png}
-	\caption{}
-	\label{fig:bad_cmrglu}
-\end{subfigure}
-\caption{Comparison of the IFs (a,d), cumulative AUC curves (b,e), and $\mrglu$ regression lines (c,f) for one of the best (top row) and worst (bottom row) performing subjects}
-\label{fig:ifs}
+\begin{figure}[h]
+	\centering
+	\begin{subfigure}[b]{0.322\textwidth}
+		\includegraphics[width=\textwidth]{figures/MOLGU07704_1_if_comparison.png}
+		\caption{}
+		\label{subfig:good_if_compare}
+	\end{subfigure}
+	\begin{subfigure}[b]{0.322\textwidth}
+		\includegraphics[width=\textwidth]{figures/MOLGU07704_1_trap.png}
+		\caption{}
+		\label{subfig:good_trap_compare}
+	\end{subfigure}
+	\begin{subfigure}[b]{0.322\textwidth}
+		\includegraphics[width=\textwidth]{figures/MOLGU07704_1_cmrglu.png}
+		\caption{}
+		\label{fig:good_cmrglu}
+	\end{subfigure}
+	\begin{subfigure}[b]{0.322\textwidth}
+		\includegraphics[width=\textwidth]{figures/CM10250_1_if_comparison.png}
+		\caption{}
+		\label{subfig:bad_if_compare}
+	\end{subfigure}
+	\begin{subfigure}[b]{0.322\textwidth}
+		\includegraphics[width=\textwidth]{figures/CM10250_1_trap.png}
+		\caption{}
+		\label{subfig:bad_trap_compare}
+	\end{subfigure}
+	\begin{subfigure}[b]{0.322\textwidth}
+		\includegraphics[width=\textwidth]{figures/CM10250_1_cmrglu.png}
+		\caption{}
+		\label{fig:bad_cmrglu}
+	\end{subfigure}
+	\caption{Comparison of the IFs (a,d), cumulative AUC curves (b,e), and $\mrglu$ regression lines (c,f) for one of the best-(top row) and worst-performingr(bottom row) subjects}
+	\label{fig:ifs}
 \end{figure}
 
 ROI-based quantification was carried out using both IDIF methods, with BGTM yielding significantly better performance.
@@ -103,13 +102,11 @@ In addition, the MAE for the coefficient of determination (\(R^2\)) and the regr
 	\label{tab:metrics}
 \end{table}
 
-\newpage
 A paired t-test was conducted to compare the performance of BGTM and GTM across previously mentioned metrics.
 The results, summarized in Table~\ref{tab:metrics}, indicate that BGTM significantly outperforms GTM in cAUC MAE(\( t = 7.44 \), \( p = 7.2 \times 10^{-10} \)), $\mrglu$ MAPE (\( t = 4.32 \), \( p = 6.5 \times 10^{-5} \)), $\mrglu$ MAE (\( t = 4.41 \), \( p = 4.8 \times 10^{-5} \)), and $\mrglu$ Slope MAE (\( t = 4.73 \), \( p = 1.6 \times 10^{-5} \)), demonstrating the effectiveness of the proposed method.
 However, no significant difference was observed in $\mrglu$ \(R^2\) MAE (\( t = 1.45 \), \( p = 0.15 \)).
 
-
-As illustrated in Figure~\ref{fig:corr_mat}, there is a strong correlation between the cAUC MAE and the quantification errors showing cAUC can be a good intermediate metric.
+As illustrated in Figure~\ref{fig:corr_mat}, there is a strong correlation between the cAUC MAE and the quantification errors suggesting cAUC as a reliable intermediate metric.
 
 \begin{figure}[h]
 	\centering
