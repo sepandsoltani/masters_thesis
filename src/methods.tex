@@ -5,7 +5,7 @@
 PET data were acquired in list mode during 90 min from the injection of an intravenous bolus of \fdg.
 Simultaneously, an arterial time-of-flight MR was acquired in axial orientation, with a voxel size of 0.3$\times$0.3$\times$0.7 mm.
 Raw PET data were rebinned into 24-time frames (variable length frames : 8$\times$15 s, 3$\times$60 s, 5$\times$120 s, 1$\times$300 s, 7$\times$600 s) sinograms for dynamic reconstruction.
-Reconstruction yielded a voxel size of 1.04$\times$1.04$\times$2.08 mm$^3$ in a matrix of 344$\times$344 voxels.
+Reconstruction yielded a voxel size of 1.04$\times$1.04$\times$2.08 mm$^3$ in a matrix of 344$\times$344$\times$127 voxels .
 
 AIF in the whole blood and plasma were measured from 26 arterial blood samples manually collected (with the following timing: every 5 s for the first minute, every 15 s until second minute, and at times 3, 5, 10, 20, 30, 45, 60, 75, 80, 85 and 90 minutes post-injection) and counted with a gamma counter.
 
@@ -91,7 +91,8 @@ with \(\chi_n\) and \(\chi_m\) denoting the binary masks of regions \(n\) and \(
 
 $T_{c}$ and $T_{bg}$ are respectively the observered carotid and background TACs and $T_{IF}$ and $T_{tissue}$ are the real unknown TACs of the carotid (the input function) and the background tissue.
 
-By inversing the GTM, this system of equations can be easily solved. However, the GTM being a low rank matrix makes the inversion sensitive to noise and biased on small regions such as the carotid \cite{zanotti2011image, boellaard2004effects}.
+By inversing the GTM, this system of equations can be easily solved.
+However, the GTM being a low rank matrix makes the inversion sensitive to noise and biased on small regions such as the carotid \cite{zanotti2011image, boellaard2004effects}.
 
 \subsection{Bayesian Geometric Transfer Matrix}
 To overcome challenges posed to GTM method, we utilized a Bayesian framework that jointly estimates the input function and tissue kinetics \cite{irace2021bayesian}.
@@ -134,7 +135,7 @@ where \( p(\mathcal{D} \mid \Theta) \) is the likelihood function and \( \pi(\Th
 
 \section{Evaluation}
 \subsection{IF Curves}
-The performance of the proposed IDIF estimation was first evaluated by computing the mean absolute error (MAE) between the cumulative area under the curve (cAUC) of the estimated IDIF and the \textit{grand true} AIF. cAUC was considered to be a more suitable metric since it provides an integrated measure of tracer exposure over time and is less sensitive to local fluctuations or noise in the curve compared to the directly comparing the TACs.
+The performance of the proposed IDIF estimation was first evaluated by computing the mean absolute error (MAE) between the cumulative area under the curve (cAUC) of the estimated IDIF and the \textit{ground true} AIF. cAUC was considered to be a more suitable metric since it provides an integrated measure of tracer exposure over time and is less sensitive to local fluctuations or noise in the curve compared to the directly comparing the TACs.
 \begin{equation}
 	\textrm{cAUC}(t) =  \int_{0}^{t} IF(\tau) \, d\tau,
 \end{equation}
@@ -162,35 +163,3 @@ and
 	\text{MAE}(S) = \frac{1}{N} \sum_{i=1}^{N} \left| S_i - 1 \right|,
 \end{equation}
 where $N$ is the number of subjects and \(R^2_i\) and \(S_i\) denote the coefficient of determination and the regression slope for subject \(i\), respectively.
-
-% \begin{figure}[H]
-% 	\centering
-% 	\begin{tikzpicture}[
-% 			node distance=1cm,
-% 			auto,
-% 			>=Stealth,
-% 			nodebox/.style={draw, rounded corners, rectangle, minimum width=3cm, minimum height=1cm, align=center}
-% 		]
-% 		\node[nodebox] (tof) {TOF-MRI};
-% 		\node[nodebox, right=of tof] (seg) {Carotid\\Segmentation};
-% 		\node[nodebox, below=of seg] (idif) {IDIF estimation};
-% 		\node[nodebox, left=of idif] (pet) {PET};
-% 		\node[nodebox, right=of idif] (aif) {AIF};
-% 		\node[nodebox, below=of idif] (quantIDIF) {Quantification};
-% 		\node[nodebox, below=of aif] (quantAIF) {Quantification};
-%
-% 		\coordinate (mid) at ($(quantIDIF)!0.5!(quantAIF)$);
-% 		\node[nodebox,minimum width=7cm, below=of mid] (eval) {Evaluation};
-%
-% 		\draw[->] (tof) -- (seg);
-% 		\draw[->] (seg) -- (idif);
-% 		\draw[->] (pet) -- (idif);
-% 		\draw[->] (idif) -- (quantIDIF);
-% 		\draw[->] (aif) -- (quantAIF);
-% 		\draw[->] (quantIDIF.south) -- (quantIDIF.south |- eval.north);
-% 		\draw[->] (quantAIF.south) -- (quantAIF.south |- eval.north);
-% 	\end{tikzpicture}
-% 	\caption{The IDIF estimation and evaluation pipeline}
-% \end{figure}
-%
-

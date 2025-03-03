@@ -121,28 +121,5 @@ Early PET-only approaches primarily focused on classical partial volume correcti
 Hybrid PET/MRI methods improve carotid artery delineation by leveraging anatomical imaging. The caliPER software, for instance, employs a semi-automated approach for IDIF extraction using carotid masks obtained from T1 or TOF-MRA images, incorporating partial volume correction \cite{dassanayake2022caliper}.
 Additionally, fully automated methods have been proposed to enhance carotid segmentation and PVC techniques \cite{sari2017estimation, jochimsen2016fully, khalighi2018image, sundar2019towards}.
 
-% Various techniques have been proposed for IDIF extraction in PET/MRI hybrid imaging.
-% \citeauthor{dassanayake2022caliper} \cite{dassanayake2022caliper} developed caliPER; A semi-automated software for IDIF extraction using carotid masks obtained from T1 or TOF-MRA images with partial volume correction.
-% Supervised clustering algorithms \cite{lyoo2014image} and deep learning pipelines \cite{chavan2024end} eliminate manual carotid segmentation.
-% % \citeauthor{sundar2019towards} \cite{sundar2019towards} proposed a fully automatique technique for carotid segmentation and partial volume effect correction from TOF-MRA images.
-% % Advanced in deep learning techniques gave way to techniques such as
-% Recent work highlights progress in automating IDIF extraction using anatomical PET/MRI guidance and partial volume correction (PVC).
-% Supervised clustering algorithms \cite{lyoo2014image} and deep learning pipelines \cite{chavan2024end} eliminate manual carotid segmentation, achieving errors <10\% compared to arterial inputs.
-%
-% Several methods have been developed to enhance IDIF accuracy by addressing partial volume correction and automation challenges.
-% caliper; a semi-automated software for idif extraction using carotid masks obtained from t1 or tof-mra images with partial volume correction.
-% It enabled blood-free quantification with minimal bias \cite{dassanayake2022caliper}.
-% Supervised clustering techniques reduce noise and operator variability by automating the carotid segmentation process while maintaining accuracy \cite{lyoo2014image}.
-% \citeauthor{chavan2024end} proposed an end-to-end deep learning technique to directly extract the IDIF 
-% % Deep learning pipelines using 3D U-Net and RNN models further improve carotid segmentation and IDIF estimation \cite{chavan2024end}.
-% Automated MR-driven IDIF extraction has shown strong agreement with arterial sampling \cite{sundar2019towards},
-% % while optimized TOF-PET/MR techniques help mitigate spill-over effects in cerebral blood flow mapping \cite{khalighi2018image}.
-% These advancements improve the reliability and clinical feasibility of non-invasive IDIF methods.
-
-% Tools like caliPER \cite{dassanayake2022caliper} integrate MR-derived carotid masks with PVC for Patlak mapping, reducing bias in [18F]FDG quantification to <8\%.
-
-% Hybrid PET/MRI protocols further validate MR-driven IDIFs, showing <5\% deviation in AUC and 3.2\% error in glucose metabolism \cite{sundar2019towards}.
-% Despite advances, residual variability persists in spill-in/spill-out correction, particularly for small vessels \cite{khalighi2018image}, underscoring the need for robust, generalized PVC frameworks.
-
 \citeauthor{irace2021bayesian} \cite{irace2021bayesian} proposed an automatique method for IDIF estimation by performing TOF-MRA driven carotid segmentation and using a Bayesian framework for incorporating prior knowledge into a geometric transfer matrix method \cite{rousset1998correction}---a classical partial volume correction technique.
 In this work, the aim was to improve this method and enhance accuracy by evaluating it on a dataset of comatose patients.
